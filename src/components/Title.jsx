@@ -1,3 +1,4 @@
+import React from "react"
 
 const Title = () => {
   console.log('Rendering Title')
@@ -6,4 +7,4 @@ const Title = () => {
   )
 }
 
-export default Title
+export default React.memo(Title)

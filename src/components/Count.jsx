@@ -1,3 +1,4 @@
+import React from "react"
 
 const Count = ({text, count}) => {
   console.log(`Rendering ${text}`)
@@ -6,4 +7,4 @@ const Count = ({text, count}) => {
   )
 }
 
-export default Count
+export default React.memo(Count)
