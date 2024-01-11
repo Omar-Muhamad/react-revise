@@ -1,4 +1,4 @@
-import { isValidElement, useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Button from "./Button";
 import Count from "./Count";
 import Title from "./Title";
@@ -15,13 +15,13 @@ const ChildComponent = () => {
     setSalary((prev) => prev + 1000);
   }, [salary]);
 
-  const isEven = () => {
+  const isEven = useMemo(() => {
     // time consuming operation (data fetching)
     let i = 0;
     while (i < 500000000) i++;
 
     return age % 2 === 0;
-  };
+  },[age])
 
   return (
     <div className="">
@@ -29,7 +29,7 @@ const ChildComponent = () => {
       <Count text="Age" count={age} />
       <div>
         <Button handleClick={incrementAge}>Increment age</Button>
-        <span>{isEven() ? "  Even" : "  Odd"}</span>
+        <span>{isEven ? "  Even" : "  Odd"}</span>
       </div>
       <Count text="Salary" count={salary} />
       <Button handleClick={incrementSalary}>Increment salary</Button>
