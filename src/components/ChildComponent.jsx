@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Button from "./Button";
 import Count from "./Count";
 import Title from "./Title";
@@ -7,13 +7,13 @@ const ChildComponent = () => {
   const [age, setAge] = useState(25);
   const [salary, setSalary] = useState(5000);
 
-  const incrementAge = () => {
+  const incrementAge = useCallback(() => {
     setAge((prev) => prev + 1);
-  };
+  },[age])
 
-  const incrementSalary = () => {
-    setSalary((prev) => prev + 1000);
-  };
+  const incrementSalary = useCallback( () => {
+      setSalary((prev) => prev + 1000)
+  }, [salary])
 
   return (
     <div className="">
