@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { isValidElement, useCallback, useState } from "react";
 import Button from "./Button";
 import Count from "./Count";
 import Title from "./Title";
@@ -9,17 +9,28 @@ const ChildComponent = () => {
 
   const incrementAge = useCallback(() => {
     setAge((prev) => prev + 1);
-  },[age])
+  }, [age]);
 
-  const incrementSalary = useCallback( () => {
-      setSalary((prev) => prev + 1000)
-  }, [salary])
+  const incrementSalary = useCallback(() => {
+    setSalary((prev) => prev + 1000);
+  }, [salary]);
+
+  const isEven = () => {
+    // time consuming operation (data fetching)
+    let i = 0;
+    while (i < 500000000) i++;
+
+    return age % 2 === 0;
+  };
 
   return (
     <div className="">
       <Title />
       <Count text="Age" count={age} />
-      <Button handleClick={incrementAge}>Increment age</Button>
+      <div>
+        <Button handleClick={incrementAge}>Increment age</Button>
+        <span>{isEven() ? "  Even" : "  Odd"}</span>
+      </div>
       <Count text="Salary" count={salary} />
       <Button handleClick={incrementSalary}>Increment salary</Button>
     </div>
