@@ -1,8 +1,12 @@
+import FocusInput from "./FocusInput";
 
 const ChildComponent = () => {
   return (
-    <h1>Hello world!</h1>
-  )
-}
+    <>
+      <h1>Hello world!</h1>
+      <FocusInput />
+    </>
+  );
+};
 
-export default ChildComponent
+export default ChildComponent;
