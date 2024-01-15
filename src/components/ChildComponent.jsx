@@ -14,7 +14,7 @@ const ChildComponent = () => {
     }
   };
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     if (e.key === "Enter") {
       const value = e.target.value;
       const filteredUsers = users.filter((user) =>
