@@ -21,7 +21,6 @@ const ChildComponent = () => {
     const filteredUsers = users.filter((user) =>
       user.firstname.toLowerCase().includes(value.toLowerCase())
     );
-    console.log(filteredUsers);
     setFilteredUsers(filteredUsers);
   };
 
@@ -34,11 +33,13 @@ const ChildComponent = () => {
       <h1>Hello world!</h1>
       <input className="border-2" type="text" onChange={handleChange} />
       <ul>
-        {filteredUsers.map((user) => (
-          <li key={user.id}>
-            The username is {user.firstname} {user.lastname}
-          </li>
-        ))}
+        {filteredUsers.length === 0
+          ? "No   match"
+          : filteredUsers.map((user) => (
+              <li key={user.id}>
+                The username is {user.firstname} {user.lastname}
+              </li>
+            ))}
       </ul>
     </>
   );
