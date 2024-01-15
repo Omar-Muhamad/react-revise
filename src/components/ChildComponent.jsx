@@ -1,40 +1,42 @@
-import { useState } from "react";
-
-const userData = [
-  {
-    name: "Omar",
-    job: "Fullstack developer",
-  },
-  {
-    name: "John",
-    job: "Teacher",
-  },
-  {
-    name: "Jack",
-    job: "Engineer",
-  },
-];
+import { useEffect, useState } from "react";
 
 const ChildComponent = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
-  const handleChange = (e) => {
+  const getUsersData = async () => {
+    try {
+      const response = await fetch("https://jsonplaceholder.org/users");
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      return "Something went wrong";
+    }
+  };
+
+  const handleChange = async (e) => {
     e.preventDefault();
     const value = e.target.value;
-    const filteredUsers = userData.filter((user) =>
-      user.name.toLowerCase().includes(value.toLowerCase())
+    console.log(users);
+    const filteredUsers = users.filter((user) =>
+      user.firstname.toLowerCase().includes(value.toLowerCase())
     );
-    setUsers(filteredUsers);
+    console.log(filteredUsers);
+    setFilteredUsers(filteredUsers);
   };
+
+  useEffect(() => {
+    getUsersData();
+  }, []);
 
   return (
     <>
       <h1>Hello world!</h1>
       <input className="border-2" type="text" onChange={handleChange} />
       <ul>
-        {users.map((user, index) => (
-          <li key={`${user.name}${index}`}>
-            The username is {user.name} and he is a {user.job}
+        {filteredUsers.map((user) => (
+          <li key={user.id}>
+            The username is {user.firstname} {user.lastname}
           </li>
         ))}
       </ul>
